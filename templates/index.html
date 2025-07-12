@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Info Manager</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Student Info Manager</h1>
+
+    <form method="GET" action="/">
+      <input type="text" name="search" value="{{ search }}" placeholder="Search by name">
+      <button type="submit">Search</button>
+    </form>
+
+    <form method="POST" action="/add">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="text" name="class" placeholder="Class" required>
+      <input type="number" name="age" placeholder="Age" required>
+      <button type="submit">Add Student</button>
+    </form>
+
+    <h2>Student List</h2>
+    <ul>
+      {% for student in students %}
+        <li>
+          <strong>{{ student[1] }}</strong> (Class: {{ student[2] }}, Age: {{ student[3] }})
+          <a href="/edit/{{ student[0] }}">✏️ Edit</a>
+          <a href="/delete/{{ student[0] }}" class="delete-btn">❌ Delete</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
